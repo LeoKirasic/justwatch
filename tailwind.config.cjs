@@ -9,6 +9,10 @@ module.exports = {
         primary: '#FBC500',
         dark: '#060D17',
       },
+      fontFamily: {
+        lato: ['Lato', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 };
