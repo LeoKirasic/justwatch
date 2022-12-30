@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   app:
-    container_name: test
-    image: test
+    container_name: app
+    image: app
     build:
       context: .
       target: development
