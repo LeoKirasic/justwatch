@@ -24,12 +24,22 @@ function MovieCard(props: MovieCardProps) {
     });
   };
 
-  const HandleFavorites = () => {
-    props.removeFromFavorites({
-      id: props.id,
-      title: props.title,
-      poster_path: props.poster_path,
-    });
+  const handleFavorites = () => {
+    if (isFavorite) {
+      props.removeFromFavorites({
+        id: props.id,
+        title: props.title,
+        poster_path: props.poster_path,
+      });
+      setIsFavorite(false);
+    } else {
+      props.addToFavorites({
+        id: props.id,
+        title: props.title,
+        poster_path: props.poster_path,
+      });
+      setIsFavorite(true);
+    }
   };
 
   return (
@@ -43,17 +53,11 @@ function MovieCard(props: MovieCardProps) {
       />
       {isFavorite ? (
         <input
+          className='cursor-pointer'
           type='button'
           value='Remove from favorites'
           onClick={() => {
-            props.removeFromFavorites(
-              {
-                id: props.id,
-                title: props.title,
-                poster_path: props.poster_path,
-              },
-              setIsFavorite(false)
-            );
+            handleFavorites();
           }}
         />
       ) : (
@@ -61,16 +65,7 @@ function MovieCard(props: MovieCardProps) {
           className='cursor-pointer'
           type='button'
           value='Add to favorites'
-          onClick={() =>
-            props.addToFavorites(
-              {
-                id: props.id,
-                title: props.title,
-                poster_path: props.poster_path,
-              },
-              setIsFavorite(true)
-            )
-          }
+          onClick={() => handleFavorites()}
         />
       )}
     </div>
