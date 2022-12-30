@@ -5,12 +5,17 @@ import { DefaultProps, Genre, Movie } from '../../ts/interfaces';
 const MovieList = (props: DefaultProps) => {
   const [genres, setGenres] = useState<Genre[]>([]);
 
-  const fetchGenreData = ({ id, name }: any): Promise<Genre> => {
-    return fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=2e5db5afde79d3887eb3a3855d6253d6&with_genres=${id}`
-    )
-      .then((response) => response.json())
-      .then((data) => ({ ...data, name }));
+  const fetchGenreData = async ({ id, name }: any): Promise<Genre> => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=2e5db5afde79d3887eb3a3855d6253d6&with_genres=${id}`
+      );
+      const data = await response.json();
+      return { ...data, name };
+    } catch (error) {
+      console.error(error);
+    }
+    return { name: '', movies: [], id: 0, results: [] };
   };
 
   const fetchAllGenreData = (
@@ -52,11 +57,11 @@ const MovieList = (props: DefaultProps) => {
     return (
       <div>
         {genres.map((genre) => (
-          <div className='' key={genre.id}>
+          <div key={genre.id}>
             <h2 className='font-bold text-lg'>{genre.name}</h2>
             <ul className='flex overflow-x-auto w-[1000px]'>
               {genre.results.map((movie) => (
-                <li className='' key={movie.id}>
+                <li key={movie.id}>
                   <MovieCard
                     favorites={props.favorites}
                     id={movie.id}

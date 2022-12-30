@@ -21,11 +21,15 @@ function MovieDetails(props: any) {
 
   useEffect(() => {
     const fetchMovie = async () => {
-      const data = await fetch(
-        `https://api.themoviedb.org/3/movie/${location.state.movie}?api_key=2e5db5afde79d3887eb3a3855d6253d6&language=en-US`
-      );
-      const movie = await data.json();
-      setMovie(movie);
+      try {
+        const data = await fetch(
+          `https://api.themoviedb.org/3/movie/${location.state.movie}?api_key=2e5db5afde79d3887eb3a3855d6253d6&language=en-US`
+        );
+        const movie = await data.json();
+        setMovie(movie);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchMovie();
   }, [movie]);
