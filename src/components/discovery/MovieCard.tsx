@@ -43,28 +43,28 @@ function MovieCard(props: MovieCardProps) {
   };
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col items-center'>
       <img
         onClick={(e) => viewMovieDetails(e)}
         data-id={props.id}
-        className='max-w-[200px] cursor-pointer'
+        className='max-w-[100px] md:max-w-[150px] cursor-pointer'
         src={`https://image.tmdb.org/t/p/w500${props.poster_path}`}
         alt=''
       />
       {isFavorite ? (
         <input
-          className='cursor-pointer'
+          className='cursor-pointer mb-3'
           type='button'
-          value='Remove from favorites'
+          value='Remove'
           onClick={() => {
             handleFavorites();
           }}
         />
       ) : (
         <input
-          className='cursor-pointer'
+          className='cursor-pointer mb-3'
           type='button'
-          value='Add to favorites'
+          value='Add'
           onClick={() => handleFavorites()}
         />
       )}

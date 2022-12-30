@@ -17,7 +17,6 @@ function SearchResult(props: DefaultProps) {
       );
       const movies = await data.json();
       setMovies(movies.results);
-      console.log(location.state);
     };
     fetchMoviesBySearchParam();
   }, [location.state.query]);
@@ -25,7 +24,7 @@ function SearchResult(props: DefaultProps) {
   return (
     <div>
       <Nav favorites={props.favorites}></Nav>
-      <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-10 xl:grid-cols-5 justify-center'>
+      <div className='grid grid-cols-2 gap-2 sm:grid-cols-3 2xl:grid-cols-10 xl:grid-cols-5'>
         {Movies.map((movie) => {
           return (
             <MovieCard

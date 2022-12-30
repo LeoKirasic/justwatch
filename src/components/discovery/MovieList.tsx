@@ -58,7 +58,7 @@ const MovieList = (props: DefaultProps) => {
         {genres.map((genre) => (
           <div key={genre.id}>
             <h2 className='font-bold text-lg'>{genre.name}</h2>
-            <ul className='flex overflow-x-auto w-[1000px]'>
+            <ul className='flex overflow-x-auto w-[1000px] gap-4'>
               {genre.results.map((movie) => (
                 <li key={movie.id}>
                   <MovieCard

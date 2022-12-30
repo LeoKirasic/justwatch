@@ -22,10 +22,10 @@ function DiscoveryPage(props: DefaultProps) {
   }, []);
 
   return (
-    <div className='font-lato'>
+    <div className='font-lato flex flex-col align-center justify-center'>
       <Nav favorites={props.favorites}></Nav>
       <h1 className='font-bold text-lg'>Upcoming movies</h1>
-      <ul className='flex overflow-x-auto w-[1000px]'>
+      <ul className='flex overflow-x-auto w-[1000px] gap-4'>
         {movies.map((movie) => {
           return (
             <li key={movie.id}>

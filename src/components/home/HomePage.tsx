@@ -7,7 +7,7 @@ import Nav from '../shared/Nav';
 import TextContainer from './TextContainer';
 function HomePage(props: any) {
   return (
-    <div className='flex flex-col items-center  font-lato'>
+    <div className='flex flex-col items-center font-lato'>
       <Nav favorites={props.favorites}></Nav>
       <TextContainer></TextContainer>
       <DiscoverButton></DiscoverButton>

@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Nav from '../shared/Nav';
+import { Movie } from '../../ts/interfaces';
+
+type MovieDetailsProps = {
+  addToFavorites: (movie: Movie) => void;
+  removeFromFavorites: (movie: Movie) => void;
+  favorites: Movie[];
+};
 
 function MovieDetails(props: any) {
   const [movie, setMovie] = useState<any>([]);
   const location = useLocation();
-
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
@@ -34,11 +40,29 @@ function MovieDetails(props: any) {
     fetchMovie();
   }, [movie]);
 
+  const handleFavorites = () => {
+    if (isFavorite) {
+      props.removeFromFavorites({
+        id: movie.id,
+        title: movie.title,
+        poster_path: movie.poster_path,
+      });
+      setIsFavorite(false);
+    } else {
+      props.addToFavorites({
+        id: movie.id,
+        title: movie.title,
+        poster_path: movie.poster_path,
+      });
+      setIsFavorite(true);
+    }
+  };
+
   if (!movie) {
     return <div>Loading...</div>;
   } else {
     return (
-      <div>
+      <div className=' 2xl:text-3xl'>
         <Nav favorites={props.favorites}></Nav>
         <img
           className='absolute top-0 left-0 w-full h-screen object-cover opacity-50 z-[-1]'
@@ -46,45 +70,32 @@ function MovieDetails(props: any) {
           alt=''
         />
         <div className='flex justify-center'>
-          <img
-            className='w-[300px]'
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt=''
-          />
+          <div>
+            <div className='flex flex-col items-center max-w-[300px] min-w-[150px]'>
+              <img
+                className='w-[300px]'
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt=''
+              />
+              {isFavorite ? (
+                <input
+                  className='cursor-pointer mb-3 '
+                  type='button'
+                  value='Remove'
+                  onClick={() => handleFavorites()}
+                />
+              ) : (
+                <input
+                  className='cursor-pointer mb-3'
+                  type='button'
+                  value='Add'
+                  onClick={() => handleFavorites()}
+                />
+              )}
+            </div>
+          </div>
           <div className='flex flex-col'>
-            <h1 className='font-bold text-xl'>{movie.title}</h1>
-
-            {isFavorite ? (
-              <input
-                type='button'
-                value='Remove from favorites'
-                onClick={() => {
-                  props.removeFromFavorites(
-                    {
-                      id: movie.id,
-                      title: movie.title,
-                    },
-                    setIsFavorite(false)
-                  );
-                }}
-              />
-            ) : (
-              <input
-                className='cursor-pointer'
-                type='button'
-                value='Add to favorites'
-                onClick={() =>
-                  props.addToFavorites(
-                    {
-                      id: movie.id,
-                      title: movie.title,
-                    },
-                    setIsFavorite(true)
-                  )
-                }
-              />
-            )}
-
+            <h1 className='font-bold text-xl 2xl:text-5xl'>{movie.title}</h1>
             <div className='flex gap-3'>
               <p>{movie.release_date}</p>
               <p>{movie.vote_average}</p>
@@ -95,8 +106,8 @@ function MovieDetails(props: any) {
                   return <p key={genre.id}>{genre.name}</p>;
                 })}
             </div>
-            <p className='font-medium text-lg'>{movie.tagline}</p>
-            <p>{movie.overview}</p>
+            <p className='font-medium text-lg 2xl:text-4xl'>{movie.tagline}</p>
+            <p className=' break-words'>{movie.overview}</p>
             <div className='flex'>
               <p>DURATION:</p>
               <p>{movie.runtime} min</p>

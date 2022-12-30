@@ -19,7 +19,7 @@ function Search() {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        className='w-20 bg-transparent text-light-gray'
+        className='text-light-gray appearance-none w-[85px] h-[35px] 2xl:w-[200px] 2xl:h-[55px] md:w-[120px] md:h-[40px] bg-transparent border border-gray-400 hover:border-gray-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline-blue'
         type='text'
         name='search'
         placeholder='Search'
