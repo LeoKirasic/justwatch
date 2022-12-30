@@ -5,11 +5,10 @@ import DiscoverButton from './DiscoverButton';
 import Header from '../shared/Header';
 import Nav from '../shared/Nav';
 import TextContainer from './TextContainer';
-function HomePage() {
+function HomePage(props: any) {
   return (
     <div className='flex flex-col items-center  font-lato'>
-      <Header></Header>
-      <Nav></Nav>
+      <Nav favorites={props.favorites}></Nav>
       <TextContainer></TextContainer>
       <DiscoverButton></DiscoverButton>
     </div>
