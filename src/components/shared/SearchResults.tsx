@@ -3,14 +3,9 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Nav from './Nav';
 import MovieCard from '../discovery/MovieCard';
+import { DefaultProps, Movie } from '../../ts/interfaces';
 
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-}
-
-function SearchResult(props: any) {
+function SearchResult(props: DefaultProps) {
   const location = useLocation();
   const [Movies, setMovies] = useState<Array<Movie>>([]);
 
@@ -37,11 +32,10 @@ function SearchResult(props: any) {
               favorites={props.favorites}
               key={movie.id}
               id={movie.id}
-              img={movie.poster_path}
+              poster_path={movie.poster_path}
               title={movie.title}
               addToFavorites={props.addToFavorites}
               removeFromFavorites={props.removeFromFavorites}
-              alt=''
             />
           );
         })}

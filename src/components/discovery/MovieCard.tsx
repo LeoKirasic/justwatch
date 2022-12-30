@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MovieCardProps } from '../../ts/interfaces';
 
-function MovieCard(props: any) {
+function MovieCard(props: MovieCardProps) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
@@ -23,13 +24,21 @@ function MovieCard(props: any) {
     });
   };
 
+  const HandleFavorites = () => {
+    props.removeFromFavorites({
+      id: props.id,
+      title: props.title,
+      poster_path: props.poster_path,
+    });
+  };
+
   return (
     <div className='flex flex-col'>
       <img
         onClick={(e) => viewMovieDetails(e)}
         data-id={props.id}
         className='max-w-[200px] cursor-pointer'
-        src={`https://image.tmdb.org/t/p/w500${props.img}`}
+        src={`https://image.tmdb.org/t/p/w500${props.poster_path}`}
         alt=''
       />
       {isFavorite ? (
@@ -41,7 +50,7 @@ function MovieCard(props: any) {
               {
                 id: props.id,
                 title: props.title,
-                img: props.img,
+                poster_path: props.poster_path,
               },
               setIsFavorite(false)
             );
@@ -57,7 +66,7 @@ function MovieCard(props: any) {
               {
                 id: props.id,
                 title: props.title,
-                img: props.img,
+                poster_path: props.poster_path,
               },
               setIsFavorite(true)
             )

@@ -1,16 +1,10 @@
 import React from 'react';
-import Header from '../shared/Header';
 import Nav from '../shared/Nav';
 import MovieCard from './MovieCard';
-import MyComponent from './MyComponent';
+import MovieList from './MovieList';
+import { Movie, DefaultProps } from '../../ts/interfaces';
 
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-}
-
-function DiscoveryPage(props: any) {
+function DiscoveryPage(props: DefaultProps) {
   const [movies, setMovies] = React.useState<Array<Movie>>([]);
 
   React.useEffect(() => {
@@ -37,19 +31,18 @@ function DiscoveryPage(props: any) {
                 addToFavorites={props.addToFavorites}
                 removeFromFavorites={props.removeFromFavorites}
                 id={movie.id}
-                img={movie.poster_path}
+                poster_path={movie.poster_path}
                 title={movie.title}
-                alt=''
               />
             </li>
           );
         })}
       </ul>
-      <MyComponent
+      <MovieList
         addToFavorites={props.addToFavorites}
         removeFromFavorites={props.removeFromFavorites}
         favorites={props.favorites}
-      ></MyComponent>
+      ></MovieList>
     </div>
   );
 }

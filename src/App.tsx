@@ -4,21 +4,22 @@ import { Route, Routes } from 'react-router-dom';
 import DiscoveryPage from './components/discovery/DiscoveryPage';
 import SearchResults from './components/shared/SearchResults';
 import MovieDetails from './components/movie_details/MovieDetails';
+import { Movie } from './ts/interfaces';
 function App() {
-  const [favorites, setFavorites] = useState<any>(
+  const [favorites, setFavorites] = useState<Movie[]>(
     localStorage.getItem('favorites')
       ? JSON.parse(localStorage.getItem('favorites') || '')
       : []
   );
 
-  const addToFavorites = (movie: any) => {
+  const addToFavorites = (movie: Movie) => {
     if (movie === null) return;
     setFavorites([...favorites, movie]);
   };
 
-  const removeFromFavorites = (movie: any) => {
+  const removeFromFavorites = (movie: Movie) => {
     const newFavorites = favorites.filter(
-      (favorite: any) => favorite.id !== movie.id
+      (favorite: Movie) => favorite.id !== movie.id
     );
     setFavorites(newFavorites);
   };
