@@ -3,17 +3,20 @@ import Nav from '../shared/Nav';
 import MovieCard from './MovieCard';
 import MovieList from './MovieList';
 import { Movie, DefaultProps } from '../../ts/interfaces';
-
 function DiscoveryPage(props: DefaultProps) {
   const [movies, setMovies] = React.useState<Array<Movie>>([]);
 
   React.useEffect(() => {
     const fetchLatestMovies = async () => {
-      const data = await fetch(
-        'https://api.themoviedb.org/3/movie/upcoming?api_key=2e5db5afde79d3887eb3a3855d6253d6&language=en-US&page=1'
-      );
-      const movies = await data.json();
-      setMovies(movies.results);
+      try {
+        const data = await fetch(
+          'https://api.themoviedb.org/3/movie/upcoming?api_key=2e5db5afde79d3887eb3a3855d6253d6&language=en-US&page=1'
+        );
+        const movies = await data.json();
+        setMovies(movies.results);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchLatestMovies();
   }, []);
