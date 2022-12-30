@@ -7,7 +7,6 @@ const Dropdown = (props: { favorites: Movie[] }) => {
   const navigate = useNavigate();
 
   const viewMovieDetails = (e: any) => {
-    console.log('what', e.target);
     navigate(`/movie/${e.target.dataset.id}`, {
       state: { movie: e.target.dataset.id },
     });
