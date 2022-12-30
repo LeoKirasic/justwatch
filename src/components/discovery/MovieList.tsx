@@ -49,7 +49,6 @@ const MovieList = (props: DefaultProps) => {
     ];
     fetchAllGenreData(genreIds).then((genres) => setGenres(genres));
   }, []);
-  console.log(genres);
 
   if (genres === undefined) {
     return <div>Loading...</div>;
